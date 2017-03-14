@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2438.cpp" />
+    <ClCompile Include="2558.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{73F0BF90-3E7B-41B3-93B0-4F4DFF56E986}</ProjectGuid>
