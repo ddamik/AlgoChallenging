@@ -1,51 +1,67 @@
 #include <cstdio>
 #include <algorithm>
+#include <queue>
 using namespace std;
 
+int map[33][33] = { 0, };
+int visited[33][33] = { 0, };
+int result[33] = { 0, };
+
+int dirX[4] = { 1,-1,0,0 };
+int dirY[4] = { 0,0,1,-1 };
+
 int n;
-int map[26][26] = { 0, };
-int visited[26][26] = { 0, };
-int result[26] = { 0, };
-
-int dirX[4] = { 0,0,1,-1 };
-int dirY[4] = { 1,-1,0,0 };
-
 int xx, yy;
 
-void dfs(int x, int y, int res) {
+int dfs(int x, int y, int num) {
 	map[x][y] = 0;
-	visited[x][y] = res;
-	result[res]++;
+	num++;
 
 	for (int i = 0; i < 4; i++) {
 		xx = x + dirX[i];
 		yy = y + dirY[i];
 
-		if (0 <= xx && xx < n && 0 <= yy && yy < n) continue;
-		if (map[xx][yy] == 0) continue;
-		dfs(xx, yy, res);
-	}	
+		if (xx < 1 || yy < 1 || xx > n || yy > n || map[xx][yy] == 0) continue;
+		else num = dfs(xx, yy, num);
+	}
+
+	return num;
 }
+
+
 int main() {
 
-	int n;
 	scanf("%d", &n);
-
-	int res = 0;
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			scanf("%1d", &map[i][j]);			
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			scanf("%1d", &map[i][j]);
 		}
 	}
-	
-	
-	for (int i = 0; i < n; i++) 
-		for (int j = 0; j < n; j++) 
-			if (map[i][j] == 1) dfs(i, j, ++res);
-	
-	
-	sort(result, result + res);
-	printf("%d\n", res);
-	for (int i = 1; i <= res; i++) printf("%d\n", result[i]);
+
+
+	int num = 0;
+	int totalCount = 0;
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			if (map[i][j] == 1) {
+				totalCount++;
+				result[++num] = dfs(i, j, 0);
+			}
+		}
+	}
+
+	int tmp = 0;
+	for (int i = 1; i <= totalCount; i++) {
+		for (int j = 1; j <= totalCount - 1; j++) {
+			if (result[j] > result[j + 1]) {
+				tmp = result[j + 1];
+				result[j + 1] = result[j];
+				result[j] = tmp;
+			}
+		}
+	}
+
+	printf("%d\n", totalCount);
+	for (int i = 1; i <= totalCount; i++) printf("%d\n", result[i]);
 	return 0;
 }
