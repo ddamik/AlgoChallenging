@@ -10,11 +10,15 @@ int main() {
 	
 	
 	int result = 0;
+	bool check = true;
 	for (int i = 0; i < len; i++) {
-		if (str[i] == ' ') result++;
+		if (check && (('a' <= str[i] && str[i] <= 'z') || ('A' <= str[i] && str[i] <= 'Z'))) {
+			check = false;
+			result++;
+		}
+		if (str[i] == ' ') check = true;
 	}
 
-	if (len == 1) printf("%d", result);
-	else printf("%d", result+1);
+	printf("%d", result);
 	return 0;
 }
