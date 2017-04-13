@@ -2,7 +2,7 @@
 #include <algorithm>
 using namespace std;
 
-char str[105];
+char str[111];
 int main() {
 
 	fgets(str, sizeof(str), stdin);

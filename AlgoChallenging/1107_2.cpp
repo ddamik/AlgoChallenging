@@ -2,16 +2,17 @@
 #include <algorithm>
 using namespace std;
 
-int n, m;
+long long int n;
+int m;
 int tmp[10];
 int button[10];
 int btnCount;
 int len;
-int minValue;
+long long int minValue;
 int num[10];
 
 int x = 1;
-int result = 0;
+long long int result = 0;
 
 /*
 100000
@@ -43,7 +44,7 @@ void dfs(int index, int numLen) {
 int main() {
 
 	//	ют╥б
-	scanf("%d", &n);
+	scanf("%lld", &n);
 	scanf("%d", &m);
 
 	int nTmp;

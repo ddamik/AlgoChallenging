@@ -3,9 +3,9 @@
 #include <algorithm>
 using namespace std;
 
-int visited[1111][1111];
-int fireVisited[1001][1111];
-char map[1111][1111];
+int visited[1001][1001];
+int fireVisited[1001][1001];
+char map[1001][1001];
 
 typedef pair<int, int> P;
 
@@ -19,7 +19,7 @@ int main() {
 
 	int t;
 	scanf("%d", &t);
-	
+
 	int w, h;
 
 	while (t--) {
@@ -52,7 +52,7 @@ int main() {
 
 				if (map[xx][yy] == '#') continue;
 				if (xx < 0 || yy < 0 || xx >= h || yy >= w) continue;
-				if (fireVisited[xx][yy] > fireVisited[x][y] + 1 || (map[xx][yy] != '#' && fireVisited[xx][yy] == 0)) {
+				if ((fireVisited[xx][yy] > fireVisited[x][y] + 1) || (map[xx][yy] != '#' && fireVisited[xx][yy] == 0)) {
 					fireQue.push(P(xx, yy));
 					fireVisited[xx][yy] = fireVisited[x][y] + 1;
 				}
@@ -70,8 +70,8 @@ int main() {
 
 				if (xx < 0 || yy < 0 || xx >= h || yy >= w) continue;
 				if (map[xx][yy] == '#' || map[xx][yy] == '*') continue;
-				if (visited[x][y] >= fireVisited[xx][yy]) continue;
-				if (visited[xx][yy] == 0 || (visited[x][y] + 1) > visited[x][yy]) {
+				if ((visited[x][y] + 1 >= fireVisited[xx][yy]) && fireVisited[xx][yy] != 0) continue;
+				if (visited[xx][yy] == 0 || ((visited[x][y] + 1) < visited[xx][yy])) {
 					que.push(P(xx, yy));
 					visited[xx][yy] = visited[x][y] + 1;
 				}
@@ -91,9 +91,13 @@ int main() {
 
 		if (minValue == 9999999) printf("IMPOSSIBLE\n");
 		else printf("%d\n", minValue);
-		
-		memset(visited, 0, sizeof(visited));
-		memset(fireVisited, 0, sizeof(fireVisited));
+
+		for (int i = 0; i < h; i++) {
+			for (int j = 0; j < w; j++) {
+				fireVisited[i][j] = 0;
+				visited[i][j] = 0;
+			}
+		}
 	}
 	return 0;
 }
