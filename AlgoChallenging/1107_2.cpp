@@ -1,83 +1,54 @@
 #include <cstdio>
 #include <algorithm>
+#include <queue>
 using namespace std;
 
-long long int n;
-int m;
-int tmp[10];
-int button[10];
-int btnCount;
-int len;
-long long int minValue;
 int num[10];
+int button[10];
+int visited[1000001];
 
-int x = 1;
-long long int result = 0;
-
-/*
-100000
-9
-0 1 3 4 5 6 7 8 9
-*/
-
-void dfs(int index, int numLen) {
-
-	if (index == numLen) {
-		result = 0;
-		x = 1;
-		for (int i = index-1; i >= 0; i--) {
-			result = result + (num[i] * x);
-			x = x * 10;
-		}
-		if (numLen + abs(n - result) == 0) return;
-		minValue = min(minValue, numLen + abs(n-result));
-		
-		return;
-	}
-
-	for (int i = 0; i < btnCount; i++) {
-		num[index] = button[i];
-		dfs(index + 1, numLen);
-	}
-	return;
-}
+typedef pair<int, int> P;
 int main() {
 
-	//	입력
-	scanf("%lld", &n);
+	int n, m;
+	scanf("%d", &n);
 	scanf("%d", &m);
 
-	int nTmp;
+	int tmp;
 	for (int i = 0; i < m; i++) {
-		scanf("%d", &nTmp);
-		tmp[nTmp]++;
+		scanf("%d", &tmp);
+		num[tmp]++;
 	}
 
-
-	//	사용 가능한 버튼 구하기
-	btnCount = 0;
+	queue<P> que;
+	//	button
 	for (int i = 0; i < 10; i++) {
-		if (tmp[i] > 0) continue;
-		button[btnCount++] = i;
+		if (num[i] > 0) continue;
+		button[i] = 1;
+		que.push(P(i, 1));
 	}
 
-	//	+,-만의 횟수
-	minValue = abs(n - 100);
+	int x, xx, vValue;
+	int minValue = 5000000;
+	minValue = min(minValue, abs(n-100));
 
-	//	자릿수가 몇자리인지 구하기
-	nTmp = n;
-	if (nTmp == 0) len = 1;
-	else {
-		while (nTmp > 0) {
-			nTmp = nTmp / 10;
-			len++;
+	while (que.size()) {
+		x = que.front().first;
+		vValue = que.front().second;
+		que.pop();
+
+		minValue = min(minValue, vValue + abs(x - n));
+		for (int i = 0; i < 10; i++) {
+			xx = x * 10 + i;
+			if (button[i] == 0) continue;
+			if (xx < 0 || xx > 1000000) continue;
+			if (visited[xx] == 0 || (visited[xx] > visited[x] + 1)) {
+				visited[xx] = visited[x] + 1;
+				que.push(P(xx, vValue + 1));
+			}
 		}
 	}
 
-	//	입력받은 자릿수 -1 ~ 입력받은 자릿수 +1 자릿수까지 완전탐색
-	for (int i = -1; i <= 1; i++) {
-		dfs(0, len + i);
-	}
 	printf("%d", minValue);
 	return 0;
 }

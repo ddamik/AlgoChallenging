@@ -25,6 +25,7 @@ int main() {
 
 	queue<P> que;
 	queue<P> searchQue[100];
+
 	int count = 0;
 	for (int i = 1; i <= n; i++) {
 		for (int j = 1; j <= n; j++) {
