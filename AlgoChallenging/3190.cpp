@@ -11,7 +11,6 @@ int dir[4][2] = {
 	{0, 1}	//	아래쪽으로 가다가 왼쪽(오른쪽), 오른쪽(왼쪽)
 };
 
-
 int map[111][111];
 int visited[111][111];
 
@@ -57,9 +56,13 @@ int main() {
 		dirQue.push(P(second, direction - 'A'));
 	}
 
+	bool result = false;
+	int resultCount = 0;
 	int dirValue = 0;
+	int xx, yy;
 	queue<P> que;
 	que.push(P(1, 1));
+	visited[1][1] = 1;
 	while (que.size()) {
 		//	queue 에 옮겨지는 위치를 넣는다.
 		//	visited = 1
@@ -67,6 +70,36 @@ int main() {
 		//	해당 칸에 사과가 없으면 pop
 		//	pop 하면서 visited = 0
 		//	visited == 1 || map[xx][yy] == # 이면 게임 queue.size()
+
+		x = que.front().first;
+		y = que.front().second;
+		resultCount++;
+
+		for (int i = 0; i < dirQue.front().first; i++) {
+			xx = x + dirX[dirValue];
+			yy = y + dirY[dirValue];
+
+			printf("[ xx %d ] [ yy %d ] \n", xx, yy);
+
+			if (map[xx][yy] == 1) {
+				que.push(P(xx, yy));
+				visited[xx][yy] = 1;
+			}
+			if (map[xx][yy] == 0) {
+				que.pop();
+				visited[x][y] = 1;
+			}
+			if (xx < 1 || yy < 1 || xx > n || yy > n || visited[xx][yy] == 1) {
+				result = true;
+				break;
+			}
+		}
+		if (result) break;
+		if (dirQue.front().second == 3) dirValue = dir[dirValue][2];
+		else dirValue = dir[dirValue][1];
+		dirQue.pop();
 	}
+
+	printf("%d", resultCount);
 	return 0;
 }
