@@ -58,28 +58,11 @@ int main() {
 		}
 	}
 	
-	for (int island = 1; island <= count; island++) {
-		
-		while (searchQue[island].size()) {
-			x = searchQue[island].front().first;
-			y = searchQue[island].front().second;
-			searchQue[island].pop();
-
-			for (int i = 0; i < 4; i++) {
-				xx = x + dirX[i];
-				yy = y + dirY[i];
-
-				if (xx < 1 || yy < 1 || xx > n || yy > n) continue;
-				if (map[xx][yy] != 0 && map[xx][yy] != island) {
-					minLength = min(minLength, searchVisited[island][x][y]);
-					continue;
-				}
-				if ((map[xx][yy] != island) && (searchVisited[island][xx][yy] == 0 || searchVisited[island][xx][yy] > searchVisited[island][x][y] + 1)) {
-					searchQue[island].push(P(xx, yy));
-					searchVisited[island][xx][yy] = searchVisited[island][x][y] + 1;
-				}
-			}
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			printf("%d ", map[i][j]);
 		}
+		printf("\n");
 	}
 	  
 	printf("%d", minLength-1);

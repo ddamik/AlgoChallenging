@@ -23,15 +23,13 @@ int main() {
 		scanf("%d", &num[i]);
 		maxValue = max(maxValue, num[i]);
 	}
-	
-	int sum = 0;
+
+	float sum = 0.0, avg = 0.0, newNum = 0.0;
 	for (int i = 0; i < n; i++) {
-		printf("%d %d\n", i, (num[i] / maxValue) * 100);
-		sum += (num[i] / maxValue) * 100;
+		newNum = (num[i] / (float)maxValue) * 100;
+		sum += newNum;
 	}
 
-	printf("\n%d\n", sum);
 	printf("%.2f", sum / n);
-
 	return 0;
 }
