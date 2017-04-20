@@ -2,7 +2,7 @@
 #include <algorithm>
 using namespace std;
 
-int n, k, numValue;
+int n, k, numValue, numCount=1;
 int num[21];
 int inputNum[21];
 
@@ -14,25 +14,15 @@ int main() {
 	if (k == 1) {
 		scanf("%d", &numValue);
 		for (int i = 0; i < n; i++) num[i] = i + 1;
-		
-		int count = 1;
-		while (next_permutation(num, num + n)) {
-			count++;
-			if (count == numValue) {
+
+		do {
+			if (numCount++ == numValue) {
 				for (int i = 0; i < n; i++) printf("%d ", num[i]);
+				break;
 			}
-		}
+		}while (next_permutation(num, num + n));
 	}
 	else {
-		for (int i = 0; i < n; i++) num[i] = i + 1;
-		for (int i = 0; i < n; i++) scanf("%d", &inputNum[i]);
-
-		int totalCount = 0;
-		int inputCount = 0;
-		while (next_permutation(num, num + n)) totalCount++;
-		while (next_permutation(inputNum, inputNum + n)) inputCount++;
-
-		printf("%d", totalCount - inputCount + 1);
+		// (n-1)!
 	}
-
 }

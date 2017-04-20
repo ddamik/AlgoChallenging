@@ -1,32 +1,32 @@
 #include <cstdio>
-#include <string.h>
+#include <algorithm>
+#include <stack>
 using namespace std;
 
+char str[100];
 int main() {
 
-	int t;
-	scanf("%d", &t);
-
-	int len;
-	char str[100];
-	char good = 'O';
+	
+		
+	int index = 0, sum = 0, count = 0;
 	char tmp;
-	int num = 0, result=0;
 
+	int t; scanf("%d\n", &t);
 	while (t--) {
 		fgets(str, sizeof(str), stdin);
-		len = strlen(str) - 1;
-		
-		for (int i = len; i >= 0; i--) {
-			tmp = str[i];
-			if (good == tmp) {
-				num++;
-				result += num;
-			}
-			else num = 0;
+		index = 0;
+		count = 0;
+		sum = 0;
+
+		while (str[index] != '\n') {
+			tmp = str[index++];
+			if (tmp == 'O') count++;
+			else count = 0;
+			sum += count;
 		}
-		printf("%d\n", result);
-		result = 0;
+
+		printf("%d\n", sum);
 	}
+
 	return 0;
 }

@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <algorithm>
+#include <cstring>
 using namespace std;
 
 char str[1000001];

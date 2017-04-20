@@ -1,30 +1,42 @@
 #include <cstdio>
+#include <queue>
 #include <algorithm>
 using namespace std;
 
+typedef pair<int, int> P;
+
 int main() {
+
 
 	int n, m;
 	scanf("%d %d", &n, &m);
 
-	int pMin = 999999;
-	int rMin = 999999;
-
-	int pTmp, rTmp;
+	queue<P> que;
+	int a, b;
 	for (int i = 0; i < m; i++) {
-		scanf("%d %d", &pTmp, &rTmp);
-		pMin = min(pMin, pTmp);
-		rMin = min(rMin, rTmp);
+		scanf("%d %d", &a, &b);
+		que.push(P(a, b));
 	}
-	
-	int set = n / 6;
-	int remain = n % 6;
 
-	int result = 0;
-	result += set * pMin;
-	result += min(pMin, rMin * remain);
+	int bResult = 2147483647;
+	int result = 2147483647;
+	int head, remain;
 
-	if (pMin == 0 || rMin == 0) printf("%d", 0);
-	else printf("%d", result);
+	head = n / 6;
+	remain = n % 6;
+
+	int set, indivi;
+	while (que.size()) {
+		set = que.front().first;
+		indivi = que.front().second;
+		que.pop();
+
+		bResult = head * min(set, 6 * indivi);
+		bResult += min(set, remain*indivi);
+
+		result = min(result, bResult);
+	}
+
+	printf("%d", result);
 	return 0;
 }
