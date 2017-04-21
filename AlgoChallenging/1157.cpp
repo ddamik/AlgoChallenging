@@ -27,7 +27,7 @@ int main() {
 		maxValue = max(maxValue, result[i]);
 	}
 
-	int index = 0;n
+	int index = 0;
 	for (int i = 0; i < 26; i++) {
 		if (maxValue == result[i]) {
 			maxCount++;
