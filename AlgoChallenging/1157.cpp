@@ -18,8 +18,14 @@ int main() {
 	for (int i = 0; i < len; i++) {
 		tmp = str[i];
 
-		if (str[i] - 'a' < 0) result[tmp - 'A']++;
-		else result[tmp - 'a']++;
+		if (str[i] - 'a' < 0) {
+			result[tmp - 'A']++;
+			printf("[ %c ][ %d ]", tmp, tmp-'A');
+		}
+		else {
+			result[tmp - 'a']++;
+			printf("[ %c ][ %d ]", tmp, tmp-'a');
+		}
 	}
 
 	int maxValue = 0, maxCount = 0;
