@@ -3,7 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-char str[10000001];
+char str[90000009];
 int result[30];
 
 int main() {
@@ -13,18 +13,16 @@ int main() {
 
 	fgets(str, sizeof(str), stdin);
 	int len = strlen(str) - 1;
-
+	
 	char tmp;
 	for (int i = 0; i < len; i++) {
 		tmp = str[i];
 
-		if (str[i] - 'a' < 0) {
+		if (tmp - 'a' < 0) {
 			result[tmp - 'A']++;
-			printf("[ %c ][ %d ]", tmp, tmp-'A');
 		}
 		else {
 			result[tmp - 'a']++;
-			printf("[ %c ][ %d ]", tmp, tmp-'a');
 		}
 	}
 
@@ -40,6 +38,7 @@ int main() {
 			index = i;
 		}
 	}
+	
 	
 	if (maxCount > 1) printf("?");
 	else printf("%c", 'A' + index);

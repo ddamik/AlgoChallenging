@@ -23,9 +23,7 @@ int main() {
 
 	//	print
 	for (int i = 0; i < 26; i++) {		
-		printf("%3d ", result[i]);
-	}	
-
-	printf("\n");
+		printf("%d ", result[i]);
+	}		
 	return 0;
 }
