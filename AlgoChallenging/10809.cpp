@@ -8,11 +8,11 @@ char str[1111];
 
 int main() {	
 	
-	fgets(str, sizeof(str), stdin);
+	scanf("%s", &str);
 
 	//	init 
 	for (int i = 0; i < 28; i++) result[i] = -1;
-	int len = strlen(str) - 1;
+	int len = strlen(str);
 
 	//	result
 	int tmp = 0;

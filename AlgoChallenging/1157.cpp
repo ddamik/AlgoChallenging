@@ -11,8 +11,8 @@ int main() {
 	//	tmp - 'a' < 0 : 대문자
 	//	대문자로 카운트
 
-	fgets(str, sizeof(str), stdin);
-	int len = strlen(str) - 1;
+	scanf("%s", &str);
+	int len = strlen(str);
 	
 	char tmp;
 	for (int i = 0; i < len; i++) {
