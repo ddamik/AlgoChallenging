@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <queue>
+#include <vector>
 #include <algorithm>
 using namespace std;
 
@@ -56,15 +57,6 @@ int main() {
 				}
 			}
 		}
-	}
-	
-	for (int i = 1; i <= n; i++) {
-		for (int j = 1; j <= n; j++) {
-			printf("%d ", map[i][j]);
-		}
-		printf("\n");
-	}
-	  
-	printf("%d", minLength-1);
+	} 
 	return 0;
 }

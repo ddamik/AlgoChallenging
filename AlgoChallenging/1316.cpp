@@ -7,7 +7,7 @@ char str[100000];
 int tmpLen[100];
 
 int count[26];
-int tmpResult[26];
+int lastIndex[26];
 
 int main() {
 
@@ -25,12 +25,26 @@ int main() {
 			str[len++] = tmpStr[i][j];
 		}
 	}
+	 
 
-	//	count[i] == 0 이면 다음알파벳이랑 다를때까지 ++
-	//	count[i] > 0 이면 tmpResult[i]--
+	
 
 	int result = 0;
 	char before = str[0];
 	
+	for (int i = 0; i < len; i++) {		
+		if (count[str[i] - 'a'] == 0) {
+			count[str[i] - 'a']++;
+			lastIndex[str[i] - 'a'] = i;
+		}
+		else if (i - lastIndex[str[i] - 'a'] > 1) count[str[i] - 'a'] = -1;
+		else count[str[i] - 'a']++;
+	}
+
+	for (int i = 0; i < 26; i++) {
+		printf("%c %d \n", 'a'+i, count[i]);
+		if (count[i] > 0) result += count[i];
+	}
+	printf("%d", result);
 	return 0;
 }
