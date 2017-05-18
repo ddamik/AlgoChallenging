@@ -25,11 +25,11 @@ int main() {
 		gcdValue = gcd(gcdValue, num[i]);
 	}
 	
-	long long int printValue = gcdValue;
-	while (minValue > printValue){
+	int printValue = gcdValue;
+	while (printValue < minValue) {
 		printf("%d ", printValue);
 		printValue += gcdValue;
 	}
-	printf("\n");
+	if (minValue == gcdValue) printf("%d\n", gcdValue);	
 	return 0;
 }
