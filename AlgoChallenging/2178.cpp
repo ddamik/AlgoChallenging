@@ -25,6 +25,14 @@ int main() {
 		}
 	}
 
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= m; j++) {
+			scanf("%1d", &board[i][j]);
+		}
+		printf("\n");
+	}
+
+	/*
 	queue<P> que;
 	que.push(P(1, 1));
 	visited[1][1] = 1;
@@ -49,5 +57,7 @@ int main() {
 	}
 
 	printf("%d", visited[n][m]);
+
+	*/
 	return 0;
 }
